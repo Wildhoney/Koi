@@ -7,3 +7,6 @@ npm-debug.log
 
 # ide
 .idea
+
+# build
+public/js/koi.js

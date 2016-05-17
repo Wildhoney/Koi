@@ -1,0 +1,38 @@
+{
+  "name": "koi",
+  "version": "0.1.0",
+  "description": "Koi is a time aware interactive bird written in THREE.js with voice recognition, and an artificial IQ.",
+  "main": "src/koi.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0"
+  },
+  "scripts": {
+    "test": "ava tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wildhoney/Koi.git"
+  },
+  "keywords": [
+    "koi",
+    "speech",
+    "recognition",
+    "voice",
+    "iq",
+    "bot",
+    "robot",
+    "bird",
+    "creature",
+    "three"
+  ],
+  "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wildhoney/Koi/issues"
+  },
+  "homepage": "https://github.com/Wildhoney/Koi#readme"
+}
