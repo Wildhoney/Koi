@@ -1,15 +1,21 @@
 {
-  "name": "koi",
+  "name": "koi-app",
   "version": "0.1.0",
   "description": "Koi is a time aware interactive bird written in THREE.js with voice recognition, and an artificial IQ.",
   "main": "src/koi.js",
-  "dependencies": {},
+  "dependencies": {
+    "annyang": "^2.4.0",
+    "keo": "^5.0.2",
+    "nlp_compromise": "^4.10.6",
+    "react": "^15.0.2"
+  },
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "webpack": "^2.1.0-beta.7"
   },
   "scripts": {
     "test": "ava tests/*.test.js",
