@@ -2,8 +2,7 @@ module.exports = {
     entry: './src/koi.js',
     output: {
         path: __dirname + '/public/js',
-        filename: 'koi.js',
-        libraryTarget: 'commonjs2'
+        filename: 'koi.js'
     },
     module: {
         loaders: [

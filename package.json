@@ -7,7 +7,8 @@
     "annyang": "^2.4.0",
     "keo": "^5.0.2",
     "nlp_compromise": "^4.10.6",
-    "react": "^15.0.2"
+    "react": "^15.0.2",
+    "three": "^0.76.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -19,6 +20,7 @@
   },
   "scripts": {
     "test": "ava tests/*.test.js",
+    "build": "webpack",
     "start": "babel server/default.js | node"
   },
   "repository": {
