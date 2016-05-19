@@ -5,6 +5,7 @@
   "main": "src/koi.js",
   "dependencies": {
     "annyang": "^2.4.0",
+    "degrees-radians": "^1.0.3",
     "keo": "^5.0.2",
     "nlp_compromise": "^4.10.6",
     "react": "^15.0.2",

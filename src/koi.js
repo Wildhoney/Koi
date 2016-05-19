@@ -23,13 +23,17 @@ import World from './components/world';
         const fieldOfView = 60;
         const nearPlane = 1;
         const farPlane = 10000;
+
         const camera = new PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+        camera.position.y = 5;
 
         const renderer = new WebGLRenderer({ alpha: true, antialias: true });
 
         renderer.setSize(width, height);
         renderer.setPixelRatio($window.devicePixelRatio);
-        renderer.shadowMap.enabled = true;
+        // renderer.shadowMap.enabled = true;
+        // renderer.shadowMapEnabled = true;
+        // renderer.shadowMapSoft = true;
 
         render(<World renderer={renderer} scene={scene} camera={camera} />, mountNode);
 
