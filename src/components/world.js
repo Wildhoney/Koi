@@ -10,13 +10,14 @@ import radians from 'degrees-radians';
  */
 const renderFloor = scene => {
 
-    const geometry = new THREE.PlaneGeometry(2000, 2000, 1, 1);
-    const material = new THREE.MeshPhongMaterial({ color: 0xe4e0ba, shading: THREE.DoubleSide });
+    const geometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
+    const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb, shading: THREE.DoubleSide });
     const mesh = new THREE.Mesh(geometry, material);
 
     mesh.rotation.x = radians(90);
     mesh.rotation.y = radians(180);
-    mesh.position.y = -10;
+    mesh.position.y = -100;
+    mesh.receiveShadow = true;
 
     scene.add(mesh);
 
@@ -33,22 +34,49 @@ const renderLights = scene => {
     const shadowLight = new THREE.DirectionalLight(0xffffff, .9);
     const ambientLight = new THREE.AmbientLight(0xdc8874, .5);
 
-    shadowLight.position.set(150, 350, 350);
+    // shadowLight.position.set(150, 350, 350);
+    shadowLight.position.y = 300;
     shadowLight.castShadow = true;
 
-    // shadowLight.shadow.camera.left = -400;
-    // shadowLight.shadow.camera.right = 400;
-    // shadowLight.shadow.camera.top = 400;
-    // shadowLight.shadow.camera.bottom = -400;
-    // shadowLight.shadow.camera.near = 1;
-    // shadowLight.shadow.camera.far = 1000;
-    //
-    // shadowLight.shadow.mapSize.width = 2048;
-    // shadowLight.shadow.mapSize.height = 2048;
+    shadowLight.position.multiplyScalar(1.3);
 
-    // scene.add(hemisphereLight);
-    scene.add(shadowLight);
+    shadowLight.shadow.cameraVisible = true;
+    shadowLight.shadow.mapSize.width = 2048;
+    shadowLight.shadow.mapSize.height = 2048;
+
+    var d = 50;
+
+    shadowLight.shadow.camera.left = -d;
+    shadowLight.shadow.camera.right = d;
+    shadowLight.shadow.camera.top = d;
+    shadowLight.shadow.cameraBottom = -d;
+
+    shadowLight.shadow.camera.far = 2000;
+    shadowLight.shadow.camera.darkness = 0.5;
+
+    shadowLight.lookAt({ x: 0, y: 0: z: 0 });
+
+    // scene.add(shadowLight);
     scene.add(ambientLight);
+
+};
+
+/**
+ * @method renderCube
+ * @param {Object} scene
+ * @return {void}
+ */
+const renderCube = scene => {
+
+    const geometry = new THREE.BoxGeometry(50, 50, 50);
+    const material = new THREE.MeshPhongMaterial({ color: 0x68c3c0, shading: THREE.FlatShading });
+    const mesh = new THREE.Mesh(geometry, material);
+
+    mesh.position.y = 150;
+    mesh.position.z = -150;
+    mesh.castShadow = true;
+
+    scene.add(mesh);
 
 };
 
@@ -68,16 +96,7 @@ const render = ({ props }) => {
      */
     const createScene = element => {
 
-        const geometry = new THREE.BoxGeometry(50, 50, 50);
-        const material = new THREE.MeshPhongMaterial({ color: 0x68c3c0, shading: THREE.FlatShading });
-        const mesh = new THREE.Mesh(geometry, material);
-
-        mesh.position.y = 15;
-        // mesh.position.x = 0;
-        mesh.position.z = -150;
-        mesh.rotation.set(50, 50, 20);
-
-        scene.add(mesh);
+        renderCube(scene);
         renderLights(scene);
         renderFloor(scene);
 
