@@ -17,12 +17,14 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "express": "^4.13.4",
-    "webpack": "^2.1.0-beta.7"
+    "webpack": "^2.1.0-beta.7",
+    "webpack-dev-server": "^2.1.0-beta.0"
   },
   "scripts": {
     "test": "ava tests/*.test.js",
     "build": "webpack",
-    "start": "babel server/default.js | node"
+    "start": "babel server/default.js | node",
+    "dev": "webpack-dev-server --hot --content-base public/"
   },
   "repository": {
     "type": "git",
