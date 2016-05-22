@@ -51,12 +51,12 @@ const renderFloor = scene => {
  */
 const renderLights = scene => {
 
-    const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000);
+    const hemisphereLight = new THREE.HemisphereLight(0xA8A39D, 0x0);
     const ambientLight = new THREE.AmbientLight(0x404040);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
 
     // Setup the shadows for the directional light.
-    directionalLight.position.set(-150, -150, 400);
+    directionalLight.position.set(150, -150, 400);
 
     directionalLight.castShadow = true;
     directionalLight.shadow.camera.left = -400;
@@ -135,6 +135,7 @@ const render = ({ props, dispatch }) => {
         renderer.setPixelRatio(props.pixelRatio);
         renderer.setSize(width, height);
         renderer.shadowMap.enabled = true;
+        renderer.shadowMap.soft = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         renderCube(scene);
@@ -143,6 +144,25 @@ const render = ({ props, dispatch }) => {
 
         element.appendChild(renderer.domElement);
         renderer.render(scene, camera);
+
+        // modelLoader.load('/models/tower-bridge.dae', collada => {
+        //
+        //     const dae = collada.scene;
+        //     dae.scale.set(1, 1, 1);
+        //     dae.rotation.z = radians(45);
+        //
+        //     scene.add(dae);
+        //     renderer.render(scene, camera);
+        //
+        // });
+
+        (function loop() {
+            // camera.position.z += -1;
+            // camera.lookAt({ x: 0, y: 0, z: 0 });
+        	renderer.render(scene, camera);
+        	setTimeout(() => requestAnimationFrame(loop), 1000);
+        })();
+
         dispatch(setApparatus(renderer, camera, scene));
 
     };
