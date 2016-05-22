@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './src/koi.js',
+    entry: './src/default.js',
     output: {
         path: __dirname + '/public/js',
         filename: 'koi.js'

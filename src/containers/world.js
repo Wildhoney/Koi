@@ -1,16 +1,25 @@
 import React, { PropTypes } from 'react';
 import THREE from 'three';
+import ColladaLoader from 'three-collada-loader'
 import { stitch } from 'keo';
 import radians from 'degrees-radians';
+
+/**
+ * @constant modelLoader
+ * @type {Object}
+ */
+const modelLoader = new ColladaLoader();
 
 /**
  * @constant propTypes
  * @type {Object}
  */
 const propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    devicePixelRatio: PropTypes.number.isRequired
+    world: PropTypes.shape({
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired
+    }), 
+    pixelRatio: PropTypes.number.isRequired
 };
 
 /**
@@ -86,7 +95,9 @@ const renderCube = scene => {
  */
 const render = ({ props }) => {
 
-    const { height, width, devicePixelRatio } = props;
+    const { world, pixelRatio } = props;
+
+    console.log('x');
 
     /**
      * @method createScene
@@ -96,16 +107,16 @@ const render = ({ props }) => {
     const createScene = element => {
 
         const scene = new THREE.Scene();
-        scene.fog = new THREE.Fog(0xbbbbbb, 100, 950);
+        scene.fog = new THREE.Fog(0xbbbbbb, 0, 950);
 
-        const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
+        const camera = new THREE.PerspectiveCamera(60, world.width / world.height, 1, 10000);
         camera.position.y = -500;
         camera.position.z = 200;
         camera.lookAt({ x: 0, y: 0, z: 0 });
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setPixelRatio(devicePixelRatio);
-        renderer.setSize(width, height);
+        renderer.setPixelRatio(pixelRatio);
+        renderer.setSize(world.width, world.height);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -122,4 +133,4 @@ const render = ({ props }) => {
 
 };
 
-export default stitch({ render });
+export default stitch({ render }, state => state);

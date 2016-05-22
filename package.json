@@ -9,7 +9,11 @@
     "keo": "^5.0.2",
     "nlp_compromise": "^4.10.6",
     "react": "^15.0.2",
-    "three": "^0.76.1"
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "three": "^0.76.1",
+    "three-collada-loader": "0.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
