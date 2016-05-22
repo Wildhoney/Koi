@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import THREE from 'three';
 import { stitch } from 'keo';
 import radians from 'degrees-radians';
+
+/**
+ * @constant propTypes
+ * @type {Object}
+ */
+const propTypes = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    devicePixelRatio: PropTypes.number.isRequired
+};
 
 /**
  * @method renderFloor
@@ -14,10 +24,9 @@ const renderFloor = scene => {
     const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb, shading: THREE.DoubleSide });
     const mesh = new THREE.Mesh(geometry, material);
 
-    mesh.rotation.x = radians(90);
-    mesh.rotation.y = radians(180);
-    mesh.position.y = -100;
-    mesh.receiveShadow = true;
+    // mesh.rotation.x = radians(90);
+    // mesh.rotation.y = radians(180);
+    // mesh.position.y = -100;
 
     scene.add(mesh);
 
@@ -31,33 +40,10 @@ const renderFloor = scene => {
 const renderLights = scene => {
 
     const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9);
-    const shadowLight = new THREE.DirectionalLight(0xffffff, .9);
-    const ambientLight = new THREE.AmbientLight(0xdc8874, .5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, .5);
 
-    // shadowLight.position.set(150, 350, 350);
-    shadowLight.position.y = 300;
-    shadowLight.castShadow = true;
-
-    shadowLight.position.multiplyScalar(1.3);
-
-    shadowLight.shadow.cameraVisible = true;
-    shadowLight.shadow.mapSize.width = 2048;
-    shadowLight.shadow.mapSize.height = 2048;
-
-    var d = 50;
-
-    shadowLight.shadow.camera.left = -d;
-    shadowLight.shadow.camera.right = d;
-    shadowLight.shadow.camera.top = d;
-    shadowLight.shadow.cameraBottom = -d;
-
-    shadowLight.shadow.camera.far = 2000;
-    shadowLight.shadow.camera.darkness = 0.5;
-
-    shadowLight.lookAt({ x: 0, y: 0: z: 0 });
-
-    // scene.add(shadowLight);
     scene.add(ambientLight);
+    scene.add(hemisphereLight);
 
 };
 
@@ -69,12 +55,10 @@ const renderLights = scene => {
 const renderCube = scene => {
 
     const geometry = new THREE.BoxGeometry(50, 50, 50);
-    const material = new THREE.MeshPhongMaterial({ color: 0x68c3c0, shading: THREE.FlatShading });
+    const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb, shading: THREE.FlatShading });
     const mesh = new THREE.Mesh(geometry, material);
 
-    mesh.position.y = 150;
-    mesh.position.z = -150;
-    mesh.castShadow = true;
+    mesh.position.z = 15;
 
     scene.add(mesh);
 
@@ -87,7 +71,7 @@ const renderCube = scene => {
  */
 const render = ({ props }) => {
 
-    const { renderer, camera, scene } = props;
+    const { height, width, devicePixelRatio } = props;
 
     /**
      * @method createScene
@@ -95,6 +79,18 @@ const render = ({ props }) => {
      * @return {void}
      */
     const createScene = element => {
+
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0xbbbbbb, 300, 950);
+
+        const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
+        camera.position.y = -300;
+        camera.position.z = 200;
+        camera.lookAt({ x: 0, y: 0, z: 0 });
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setPixelRatio(devicePixelRatio);
+        renderer.setSize(width, height);
 
         renderCube(scene);
         renderLights(scene);
