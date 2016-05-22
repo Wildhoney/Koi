@@ -5,9 +5,10 @@
 }
 
 section.world {
-    /*position: absolute;*/
-    /*width: 100%;
-    height: 100%;*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    /*background: linear-gradient(#e4e0ba, #f7d9aa);*/
+    background-color: #E2DDD9;
+    /*background: linear-gradient(#e4e0ba, #3F264D);*/
 }

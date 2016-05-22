@@ -34,8 +34,8 @@ const propTypes = {
  */
 const renderFloor = scene => {
 
-    const geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
-    const material = new THREE.MeshPhongMaterial({ color: 0xffffff, shading: THREE.DoubleSide });
+    const geometry = new THREE.PlaneGeometry(10000, 10000, 1, 1);
+    const material = new THREE.MeshPhongMaterial({ color: 0xA8A39D, shading: THREE.DoubleSide });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.receiveShadow = true;
 
@@ -55,7 +55,7 @@ const renderLights = scene => {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 
     // Setup the shadows for the directional light.
-    directionalLight.position.set(50, 50, 200);
+    directionalLight.position.set(-150, -150, 400);
 
     directionalLight.castShadow = true;
     directionalLight.shadow.camera.left = -400;
@@ -66,7 +66,6 @@ const renderLights = scene => {
 	directionalLight.shadow.camera.far = 1000;
     directionalLight.shadow.mapSize.width = 4096;
 	directionalLight.shadow.mapSize.height = 4096;
-    directionalLight.shadow.darkness = 0.5;
 
     scene.add(ambientLight);
     scene.add(hemisphereLight);
@@ -82,7 +81,7 @@ const renderLights = scene => {
 const renderCube = scene => {
 
     const geometry = new THREE.BoxGeometry(50, 50, 50);
-    const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb, shading: THREE.FlatShading });
+    const material = new THREE.MeshPhongMaterial({ color: 0xA8A39D, shading: THREE.FlatShading });
     const mesh = new THREE.Mesh(geometry, material);
 
     mesh.position.z = 25;
@@ -108,28 +107,32 @@ const render = ({ props, dispatch }) => {
      */
     const createScene = element => {
 
+        const { width, height } = props.world;
+
         if (element.querySelectorAll('canvas').length > 0) {
 
-            // Scene has already been rendered, so we only need to update the projection matrix.
-            props.scene.renderer.setSize(props.world.width, props.world.height);
-        	props.scene.camera.aspect = props.world.width / props.world.height;
-        	props.scene.camera.updateProjectionMatrix();
+            const { renderer, camera, scene } = props.scene;
 
-            return;
+            // Scene has already been rendered, so we only need to update the projection matrix.
+            renderer.setSize(width, height);
+        	camera.aspect = width / height;
+        	camera.updateProjectionMatrix();
+
+            return void renderer.render(scene, camera);
 
         }
 
         const scene = new THREE.Scene();
-        scene.fog = new THREE.Fog(0xbbbbbb, 0, 950);
+        scene.fog = new THREE.Fog(0xE2DDD9, 300, 1000);
 
-        const camera = new THREE.PerspectiveCamera(60, props.world.width / props.world.height, 1, 10000);
+        const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
         camera.position.y = -500;
-        camera.position.z = 200;
+        camera.position.z = 100;
         camera.lookAt({ x: 0, y: 0, z: 0 });
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setPixelRatio(props.pixelRatio);
-        renderer.setSize(props.world.width, props.world.height);
+        renderer.setSize(width, height);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -137,11 +140,9 @@ const render = ({ props, dispatch }) => {
         renderLights(scene);
         renderFloor(scene);
 
-        dispatch(setApparatus(renderer, camera));
         element.appendChild(renderer.domElement);
         renderer.render(scene, camera);
-
-
+        dispatch(setApparatus(renderer, camera, scene));
 
     };
 

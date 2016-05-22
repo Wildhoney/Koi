@@ -16,7 +16,8 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
 
         case SET_APPARATUS:
-            return { ...state, renderer: action.renderer, camera: action.camera };
+            const { renderer, camera, scene } = action;
+            return { ...state, renderer, camera, scene };
 
     }
 
