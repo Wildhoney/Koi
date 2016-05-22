@@ -23,9 +23,7 @@ const renderFloor = scene => {
     const geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
     const material = new THREE.MeshPhongMaterial({ color: 0xffffff, shading: THREE.DoubleSide });
     const mesh = new THREE.Mesh(geometry, material);
-
-    // mesh.rotation.x = radians(90);
-    // mesh.rotation.y = radians(180);
+    mesh.receiveShadow = true;
 
     scene.add(mesh);
 
@@ -40,9 +38,25 @@ const renderLights = scene => {
 
     const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000);
     const ambientLight = new THREE.AmbientLight(0x404040);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+
+    // Setup the shadows for the directional light.
+    directionalLight.position.set(50, 50, 200);
+
+    directionalLight.castShadow = true;
+    directionalLight.shadow.camera.left = -400;
+	directionalLight.shadow.camera.right = 400;
+	directionalLight.shadow.camera.top = 400;
+	directionalLight.shadow.camera.bottom = -400;
+	directionalLight.shadow.camera.near = 1;
+	directionalLight.shadow.camera.far = 1000;
+    directionalLight.shadow.mapSize.width = 4096;
+	directionalLight.shadow.mapSize.height = 4096;
+    directionalLight.shadow.darkness = 0.5;
 
     scene.add(ambientLight);
     scene.add(hemisphereLight);
+    scene.add(directionalLight);
 
 };
 
@@ -59,6 +73,7 @@ const renderCube = scene => {
 
     mesh.position.z = 25;
     mesh.rotation.z = 100;
+    mesh.castShadow = true;
 
     scene.add(mesh);
 
@@ -81,7 +96,7 @@ const render = ({ props }) => {
     const createScene = element => {
 
         const scene = new THREE.Scene();
-        scene.fog = new THREE.Fog(0xbbbbbb, 300, 950);
+        scene.fog = new THREE.Fog(0xbbbbbb, 100, 950);
 
         const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
         camera.position.y = -500;
@@ -91,6 +106,8 @@ const render = ({ props }) => {
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setPixelRatio(devicePixelRatio);
         renderer.setSize(width, height);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         renderCube(scene);
         renderLights(scene);
