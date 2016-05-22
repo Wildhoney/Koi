@@ -19,6 +19,13 @@ const store = createStoreWithMiddleware(reducers);
 (($window, $document) => {
 
     /**
+     * @constant theme
+     * @type {Object}
+     * @see http://www.colourlovers.com/palette/67170/Trajan
+     */
+    const theme = ['8D7966', 'A8A39D', 'D8C8B8', 'E2DDD9', 'F8F1E9'];
+
+    /**
      * @method applyDimensions
      * @return {void}
      */
@@ -34,7 +41,7 @@ const store = createStoreWithMiddleware(reducers);
 
         render((
             <Provider store={store}>
-                <World pixelRatio={$window.devicePixelRatio} />
+                <World theme={theme} pixelRatio={$window.devicePixelRatio} />
             </Provider>
         ), mountNode);
 

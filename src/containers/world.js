@@ -16,6 +16,8 @@ const modelLoader = new ColladaLoader();
  * @type {Object}
  */
 const propTypes = {
+    pixelRatio: PropTypes.number.isRequired,
+    theme: PropTypes.array.isRequired,
     world: PropTypes.shape({
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired
@@ -23,8 +25,7 @@ const propTypes = {
     scene: PropTypes.shape({
         renderer: PropTypes.object.isRequired,
         camera: PropTypes.object.isRequired
-    }).isRequired,
-    pixelRatio: PropTypes.number.isRequired
+    }).isRequired
 };
 
 /**
