@@ -20,13 +20,12 @@ const propTypes = {
  */
 const renderFloor = scene => {
 
-    const geometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
-    const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb, shading: THREE.DoubleSide });
+    const geometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
+    const material = new THREE.MeshPhongMaterial({ color: 0xffffff, shading: THREE.DoubleSide });
     const mesh = new THREE.Mesh(geometry, material);
 
     // mesh.rotation.x = radians(90);
     // mesh.rotation.y = radians(180);
-    // mesh.position.y = -100;
 
     scene.add(mesh);
 
@@ -39,8 +38,8 @@ const renderFloor = scene => {
  */
 const renderLights = scene => {
 
-    const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000, .9);
-    const ambientLight = new THREE.AmbientLight(0xffffff, .5);
+    const hemisphereLight = new THREE.HemisphereLight(0xaaaaaa, 0x000000);
+    const ambientLight = new THREE.AmbientLight(0x404040);
 
     scene.add(ambientLight);
     scene.add(hemisphereLight);
@@ -58,7 +57,8 @@ const renderCube = scene => {
     const material = new THREE.MeshPhongMaterial({ color: 0xbbbbbb, shading: THREE.FlatShading });
     const mesh = new THREE.Mesh(geometry, material);
 
-    mesh.position.z = 15;
+    mesh.position.z = 25;
+    mesh.rotation.z = 100;
 
     scene.add(mesh);
 
@@ -84,7 +84,7 @@ const render = ({ props }) => {
         scene.fog = new THREE.Fog(0xbbbbbb, 300, 950);
 
         const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
-        camera.position.y = -300;
+        camera.position.y = -500;
         camera.position.z = 200;
         camera.lookAt({ x: 0, y: 0, z: 0 });
 

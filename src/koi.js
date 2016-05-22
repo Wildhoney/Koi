@@ -14,6 +14,8 @@ import World from './components/world';
 
         const mountNode = document.querySelector('.koi');
 
+        // $window.addEventListener('resize', handleWindowResize, false);
+
         render(<World width={$window.innerWidth} height={$window.innerHeight}
                       devicePixelRatio={$window.devicePixelRatio} />, mountNode);
 
