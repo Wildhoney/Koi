@@ -1,10 +1,10 @@
-import { SET_DIMENSIONS } from '../events';
+import { SET_APPARATUS } from '../events';
 
 /**
  * @constant INITIAL_STATE
  * @type {Object}
  */
-const INITIAL_STATE = { width: 0, height: 0 };
+const INITIAL_STATE = { renderer: {}, camera: {} };
 
 /**
  * @param {Object} state
@@ -15,8 +15,8 @@ export default (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
 
-        case SET_DIMENSIONS:
-            return { ...state, width: action.width, height: action.height };
+        case SET_APPARATUS:
+            return { ...state, renderer: action.renderer, camera: action.camera };
 
     }
 

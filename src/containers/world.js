@@ -3,6 +3,7 @@ import THREE from 'three';
 import ColladaLoader from 'three-collada-loader'
 import { stitch } from 'keo';
 import radians from 'degrees-radians';
+import { setApparatus } from '../actions';
 
 /**
  * @constant modelLoader
@@ -18,7 +19,11 @@ const propTypes = {
     world: PropTypes.shape({
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired
-    }), 
+    }).isRequired,
+    scene: PropTypes.shape({
+        renderer: PropTypes.object.isRequired,
+        camera: PropTypes.object.isRequired
+    }).isRequired,
     pixelRatio: PropTypes.number.isRequired
 };
 
@@ -91,13 +96,10 @@ const renderCube = scene => {
 /**
  * @method render
  * @param {Object} props
+ * @param {Function} dispatch
  * @return {XML}
  */
-const render = ({ props }) => {
-
-    const { world, pixelRatio } = props;
-
-    console.log('x');
+const render = ({ props, dispatch }) => {
 
     /**
      * @method createScene
@@ -106,17 +108,28 @@ const render = ({ props }) => {
      */
     const createScene = element => {
 
+        if (element.querySelectorAll('canvas').length > 0) {
+
+            // Scene has already been rendered, so we only need to update the projection matrix.
+            props.scene.renderer.setSize(props.world.width, props.world.height);
+        	props.scene.camera.aspect = props.world.width / props.world.height;
+        	props.scene.camera.updateProjectionMatrix();
+
+            return;
+
+        }
+
         const scene = new THREE.Scene();
         scene.fog = new THREE.Fog(0xbbbbbb, 0, 950);
 
-        const camera = new THREE.PerspectiveCamera(60, world.width / world.height, 1, 10000);
+        const camera = new THREE.PerspectiveCamera(60, props.world.width / props.world.height, 1, 10000);
         camera.position.y = -500;
         camera.position.z = 200;
         camera.lookAt({ x: 0, y: 0, z: 0 });
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setPixelRatio(pixelRatio);
-        renderer.setSize(world.width, world.height);
+        renderer.setPixelRatio(props.pixelRatio);
+        renderer.setSize(props.world.width, props.world.height);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -124,13 +137,16 @@ const render = ({ props }) => {
         renderLights(scene);
         renderFloor(scene);
 
+        dispatch(setApparatus(renderer, camera));
         element.appendChild(renderer.domElement);
         renderer.render(scene, camera);
 
+
+
     };
 
-    return <section className="world" ref={createScene} />;
+    return <section className="world" ref={element => element && createScene(element)} />;
 
 };
 
-export default stitch({ render }, state => state);
+export default stitch({ propTypes, render }, state => state);

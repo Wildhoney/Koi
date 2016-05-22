@@ -13,3 +13,17 @@ export const setDimensions = (width, height) => {
     };
 
 };
+
+/**
+ * @method setApparatus
+ * @param {Object} renderer
+ * @param {Object} camera
+ * @return {Function}
+ */
+export const setApparatus = (renderer, camera) => {
+
+    return dispatch => {
+        dispatch({ type: e.SET_APPARATUS, renderer, camera });
+    };
+
+};

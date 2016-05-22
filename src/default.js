@@ -30,8 +30,7 @@ const store = createStoreWithMiddleware(reducers);
     $document.addEventListener('DOMContentLoaded', () => {
 
         const mountNode = document.querySelector('.koi');
-
-        // $window.addEventListener('resize', applyDimensions, false);
+        $window.addEventListener('resize', applyDimensions, false);
 
         render((
             <Provider store={store}>
