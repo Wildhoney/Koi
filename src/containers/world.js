@@ -45,7 +45,7 @@ const getEntities(props) => {
     const renderBird = () => {
 
         const geometry = new THREE.BoxGeometry(50, 50, 50);
-        const material = new THREE.MeshPhongMaterial({ color: 0xA8A39D, shading: FlatShading });
+        const material = new THREE.MeshPhongMaterial({ color: props.theme.plain, shading: FlatShading });
         const mesh = new THREE.Mesh(geometry, material);
 
         mesh.position.z = 25;
@@ -64,7 +64,7 @@ const getEntities(props) => {
      const renderFloor = () => {
 
         const geometry = new THREE.PlaneGeometry(10000, 10000, 1, 1);
-        const material = new THREE.MeshPhongMaterial({ color: 0xA8A39D, shading: DoubleSide });
+        const material = new THREE.MeshPhongMaterial({ color: props.theme.plain, shading: DoubleSide });
         const mesh = new THREE.Mesh(geometry, material);
         mesh.receiveShadow = true;
 
@@ -79,9 +79,9 @@ const getEntities(props) => {
      */
     const renderLights = () => {
 
-        const hemisphereLight = new THREE.HemisphereLight(0xA8A39D, 0x0);
-        const ambientLight = new THREE.AmbientLight(0x404040);
-        const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+        const hemisphereLight = new THREE.HemisphereLight(...props.theme.hemisphereLight);
+        const ambientLight = new THREE.AmbientLight(props.theme.ambientLight);
+        const directionalLight = new THREE.DirectionalLight(props.theme.directionalLight, 0.5);
 
         // Setup the shadows for the directional light.
         directionalLight.position.set(150, -150, 400);
@@ -140,7 +140,7 @@ const render = ({ props, dispatch }) => {
         }
 
         const scene = new THREE.Scene();
-        scene.fog = new THREE.Fog(0xE2DDD9, 300, 1000);
+        scene.fog = new THREE.Fog(props.theme.fog, 300, 1000);
 
         const camera = new THREE.PerspectiveCamera(60, width / height, 1, 10000);
         camera.position.y = -500;
