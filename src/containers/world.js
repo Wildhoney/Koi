@@ -18,13 +18,16 @@ const modelLoader = new ColladaLoader();
 const propTypes = {
     pixelRatio: PropTypes.number.isRequired,
     theme: PropTypes.array.isRequired,
-    world: PropTypes.shape({
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired
-    }).isRequired,
     scene: PropTypes.shape({
-        renderer: PropTypes.object.isRequired,
-        camera: PropTypes.object.isRequired
+        dimensions: PropTypes.shape({
+            width: PropTypes.number.isRequired,
+            height: PropTypes.number.isRequired
+        }),
+        apparatus: PropTypes.shape({
+            scene: PropTypes.object.isRequired,
+            camera: PropTypes.object.isRequired,
+            renderer: PropTypes.object.isRequired
+        })
     }).isRequired
 };
 
