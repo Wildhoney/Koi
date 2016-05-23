@@ -4,7 +4,7 @@ import { SET_APPARATUS } from '../events';
  * @constant INITIAL_STATE
  * @type {Object}
  */
-const INITIAL_STATE = { renderer: {}, camera: {} };
+const INITIAL_STATE = { renderer: {}, camera: {}, scene: {} };
 
 /**
  * @param {Object} state
