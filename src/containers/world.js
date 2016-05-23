@@ -4,9 +4,6 @@ import ColladaLoader from 'three-collada-loader'
 import { stitch } from 'keo';
 import radians from 'degrees-radians';
 import { setApparatus } from '../actions';
-import renderFloor from './entities/floor';
-import renderLights from './entities/lights';
-import renderBird from './entities/bird';
 
 /**
  * @constant modelLoader
@@ -32,6 +29,80 @@ const propTypes = {
 };
 
 /**
+ * @method getEntities
+ * @return {Object}
+ */
+const getEntities(props) => {
+
+    /**
+     * @method renderBird
+     * @param {Object} scene
+     * @return {void}
+     */
+    const renderBird = () => {
+
+        const geometry = new THREE.BoxGeometry(50, 50, 50);
+        const material = new THREE.MeshPhongMaterial({ color: 0xA8A39D, shading: FlatShading });
+        const mesh = new THREE.Mesh(geometry, material);
+
+        mesh.position.z = 25;
+        mesh.rotation.z = 100;
+        mesh.castShadow = true;
+
+        scene.add(mesh);
+
+    };
+
+    /**
+     * @method renderFloor
+     * @param {Object} scene
+     * @return {void}
+     */
+     const renderFloor = () => {
+
+        const geometry = new THREE.PlaneGeometry(10000, 10000, 1, 1);
+        const material = new THREE.MeshPhongMaterial({ color: 0xA8A39D, shading: DoubleSide });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.receiveShadow = true;
+
+        scene.add(mesh);
+
+    };
+
+    /**
+     * @method renderLights
+     * @param {Object} scene
+     * @return {void}
+     */
+    const renderLights = () => {
+
+        const hemisphereLight = new THREE.HemisphereLight(0xA8A39D, 0x0);
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+
+        // Setup the shadows for the directional light.
+        directionalLight.position.set(150, -150, 400);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.camera.left = -400;
+    	directionalLight.shadow.camera.right = 400;
+    	directionalLight.shadow.camera.top = 400;
+    	directionalLight.shadow.camera.bottom = -400;
+    	directionalLight.shadow.camera.near = 1;
+    	directionalLight.shadow.camera.far = 1000;
+        directionalLight.shadow.mapSize.width = 4096;
+    	directionalLight.shadow.mapSize.height = 4096;
+
+        scene.add(ambientLight);
+        scene.add(hemisphereLight);
+        scene.add(directionalLight);
+
+    };
+
+    return { renderBird, renderFloor, renderLights };
+
+};
+
+/**
  * @method render
  * @param {Object} props
  * @param {Function} dispatch
@@ -40,7 +111,8 @@ const propTypes = {
 const render = ({ props, dispatch }) => {
 
     // Determine whether THREE has already rendered the scene to the canvas.
-    const hasRendered = () => element.querySelectorAll('canvas').length > 0
+    const hasRendered = () => element.querySelectorAll('canvas').length > 0;
+    const entities = getEntities(props);
 
     /**
      * @method createScene
@@ -80,9 +152,9 @@ const render = ({ props, dispatch }) => {
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         // Render all of the entities to the scene.
-        renderBird(scene);
-        renderLights(scene);
-        renderFloor(scene);
+        entities.renderBird(scene);
+        entities.renderLights(scene);
+        entities.renderFloor(scene);
 
         // Save the components needed to re-render when required.
         dispatch(setApparatus(renderer, camera, scene));
