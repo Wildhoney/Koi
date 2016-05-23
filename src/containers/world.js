@@ -49,11 +49,11 @@ const render = ({ props, dispatch }) => {
      */
     const createScene = element => {
 
-        const { width, height } = props.world;
+        const { width, height } = props.scene.dimensions;
 
         if (hasRendered()) {
 
-            const { renderer, camera, scene } = props.scene;
+            const { renderer, camera, scene } = props.scene.apparatus;
 
             // Scene has already been rendered, so we only need to update the projection matrix.
             renderer.setSize(width, height);
