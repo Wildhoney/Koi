@@ -35,7 +35,7 @@ const propTypes = {
  * @method getEntities
  * @return {Object}
  */
-const getEntities(props) => {
+export const getEntities = props => {
 
     const { theme } = props;
 
