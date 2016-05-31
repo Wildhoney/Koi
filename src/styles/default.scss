@@ -7,16 +7,13 @@
 }
 
 html {
-  font-size: 10px;
   position: relative;
   min-height: 100%;
-  background-color: #B0C28E;
+  background-color: #76D3DE;
 
   > body {
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border: .625rem solid white;
 
     @import "./containers/world";
   }

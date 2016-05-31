@@ -11,7 +11,14 @@ export default class extends Component {
 
         return (
             <section className="world">
+
+                <section className="about">
+                    <h1>Koi-Koi</h1>
+                    <h2>by <a href="https://github.com/Wildhoney">Adam Timberlake</a></h2>
+                </section>
+
                 <Bird />
+
             </section>
         );
 

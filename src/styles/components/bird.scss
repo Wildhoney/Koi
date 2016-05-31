@@ -1,5 +1,7 @@
 section.bird {
-  background-color: orange;
-  width: 200px;
+  background-color: #AEE8FB;
+  width: 100%;
   height: 200px;
+  border: 1px solid red;
+  //clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
 }

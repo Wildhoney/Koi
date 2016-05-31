@@ -51,8 +51,7 @@
     "bot",
     "robot",
     "bird",
-    "creature",
-    "three"
+    "creature"
   ],
   "author": "Adam Timberlake <adam.timberlake@gmail.com>",
   "license": "MIT",

@@ -1,5 +1,31 @@
 section.world {
-  border: 1px solid red;
+  justify-content: center;
+  align-items: flex-end;
+
+  > section.about {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: .625rem;
+    color: white;
+    font-family: Lato, Tahoma, Helvetica, sans-serif;
+    text-align: right;
+    padding: .625rem;
+
+    > h1 {
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-size: .625rem;
+      font-weight: 200;
+
+      a {
+        color: lighten(#B0F8FF, 10);
+      }
+    }
+  }
 
   @import "../components/bird";
 }
