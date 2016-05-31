@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Floor from '../components/floor';
+import Bird from '../components/bird';
 
 export default class extends Component {
 
@@ -17,7 +18,11 @@ export default class extends Component {
                     <h2>by <a href="https://github.com/Wildhoney">Adam Timberlake</a></h2>
                 </section>
 
-                <Floor />
+                <section className="background">
+                    <Floor />
+                </section>
+
+                <Bird />
 
             </section>
         );
