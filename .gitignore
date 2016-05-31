@@ -9,4 +9,5 @@ npm-debug.log
 .idea
 
 # build
-public/js/koi.js
+public/assets/koi.js
+public/assets/koi.css
