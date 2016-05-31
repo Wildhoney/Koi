@@ -7,6 +7,8 @@ import ready from 'document-ready-promise';
 import reducers from './reducers';
 import World from './containers/world';
 
+import "./styles/default.scss";
+
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 

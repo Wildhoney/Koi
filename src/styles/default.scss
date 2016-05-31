@@ -1,0 +1,23 @@
+/* Theme: http://www.colourlovers.com/palette/67170/Trajan */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+  position: relative;
+  min-height: 100%;
+  background-color: #B0C28E;
+
+  > body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @import "./containers/world";
+  }
+}
