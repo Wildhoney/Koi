@@ -36,7 +36,7 @@
     "test": "ava",
     "build": "webpack -p --optimize-minimize --optimize-dedupe",
     "start": "babel server/default.js | node",
-    "dev": "webpack && webpack-dev-server --hot --content-base public/"
+    "dev": "webpack && webpack-dev-server --host 0.0.0.0 --port 5000 --inline --hot --content-base public/"
   },
   "repository": {
     "type": "git",

@@ -5,6 +5,7 @@ module.exports = {
     entry: './src/default.js',
     output: {
         path: __dirname + '/public/assets',
+        publicPath: '/assets/',
         filename: 'koi.js'
     },
     module: {
