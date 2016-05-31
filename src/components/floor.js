@@ -9,9 +9,7 @@ export default class extends Component {
     render() {
 
         return (
-            <section className="bird">
-                Bird...
-            </section>
+            <section className="floor" />
         );
 
 

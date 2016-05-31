@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Bird from '../components/bird';
+import Floor from '../components/floor';
 
 export default class extends Component {
 
@@ -17,7 +17,7 @@ export default class extends Component {
                     <h2>by <a href="https://github.com/Wildhoney">Adam Timberlake</a></h2>
                 </section>
 
-                <Bird />
+                <Floor />
 
             </section>
         );

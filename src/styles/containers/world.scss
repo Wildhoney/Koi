@@ -1,6 +1,8 @@
 section.world {
-  justify-content: center;
-  align-items: flex-end;
+  @import "../components/floor";
+
+  display: flex;
+  flex: 1;
 
   > section.about {
     position: absolute;
@@ -26,6 +28,4 @@ section.world {
       }
     }
   }
-
-  @import "../components/bird";
 }

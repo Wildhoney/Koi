@@ -9,12 +9,23 @@
 html {
   position: relative;
   min-height: 100%;
-  background-color: #76D3DE;
 
   > body {
     min-height: 100vh;
-    border: .625rem solid white;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    padding: .625rem;
 
-    @import "./containers/world";
+    section.koi {
+      @import "./containers/world";
+
+      width: 100%;
+      min-height: 100%;
+      background-color: #76D3DE;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
