@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Bird from '../components/bird';
 
 export default class extends Component {
 
@@ -10,8 +9,8 @@ export default class extends Component {
     render() {
 
         return (
-            <section className="world">
-                <Bird />
+            <section className="bird">
+                Bird...
             </section>
         );
 
