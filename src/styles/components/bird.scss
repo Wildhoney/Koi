@@ -1,12 +1,10 @@
 section.bird {
   width: 20vmax;
   height: 20vmax;
-  border: 1px solid red;
   position: relative;
   margin-bottom: 30vh;
-  //background: transparent url('http://image005.flaticon.com/1/svg/112/112288.svg') no-repeat;
 
-  > div {
+  div {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -14,48 +12,72 @@ section.bird {
     left: 0;
   }
 
-  div.left-body {
-    -webkit-clip-path: polygon(50% 7%, 40% 80%, 18% 50%);
-    background-color: #efefef;
+  .wing-left {
+    $main-colour: #dedede;
+
+    .wing-left__wing {
+      clip-path: polygon(15% 100%, 40% 80%, 18% 50%);
+      background-color: $main-colour;
+    }
+
+    .wing-left__feather {
+      background-color: $main-colour;
+    }
+
+    .wing-left__feather--first {
+      clip-path: polygon(17% 76%, 12% 91%, 16% 86%);
+    }
+
+    .wing-left__feather--second {
+      clip-path: polygon(27% 82%, 13% 94%, 16% 87%);
+    }
+
+    .wing-left__feather--third {
+      clip-path: polygon(32% 82%, 26% 87%, 26% 96%);
+    }
   }
 
-  div.left-wing {
-    -webkit-clip-path: polygon(15% 100%, 40% 80%, 18% 50%);
-    background-color: #dedede;
+  .body {
+
+    .body__left-ribs {
+      clip-path: polygon(50% 7%, 40% 80%, 18% 50%);
+      background-color: #efefef;
+    }
+
+    .body__left-side {
+      clip-path: polygon(18% 50%, 50% 7%, 28% 24%);
+      background-color: #fefefe;
+    }
+
+    .body__breast {
+      clip-path: polygon(60% 80%, 50% 7%, 40% 80%);
+      background-color: #eaeaea;
+    }
   }
 
-  div.top-left {
-    -webkit-clip-path: polygon(18% 50%, 50% 7%, 28% 24%);
-    background-color: #fefefe;
+  .hair {
+
+    .hair__tuft {
+      clip-path: polygon(40% 0, 50% 7%, 40% 5%);
+      background-color: #fefefe;
+    }
   }
 
-  div.lower-left {
-    -webkit-clip-path: polygon(50% 80%, 50% 7%, 40% 80%);
-    background-color: #eaeaea;
-  }
+  .foot-left {
 
-  div.left-antenna {
-    -webkit-clip-path: polygon(40% 0, 50% 7%, 40% 5%);
-    background-color: #fefefe;
-  }
+    .foot-left__leg {
+      clip-path: polygon(50% 80%, 45% 95%, 40% 80%);
+      background-color: #ccc;
+    }
 
-  div.beak-left {
-    -webkit-clip-path: polygon(50% 39%, 50% 54%, 41% 45%);
-    background-color: #999;
-  }
+    .foot-left__toe-left {
+      clip-path: polygon(43.5% 90%, 45% 95%, 35% 100%);
+      background-color: #ddd;
+    }
 
-  div.foot-left {
-    -webkit-clip-path: polygon(50% 80%, 45% 95%, 40% 80%);
-    background-color: #ccc;
-  }
-
-  div.toe-left {
-    -webkit-clip-path: polygon(43.5% 90%, 45% 95%, 35% 100%);
-    background-color: #ddd;
-  }
-
-  div.toe-right {
-    -webkit-clip-path: polygon(46.5% 90%, 45% 95%, 55% 100%);
-    background-color: #bbb;
+    .foot-left__toe-right {
+      clip-path: polygon(46.5% 90%, 45% 95%, 55% 100%);
+      background-color: #bbb;
+    }
   }
 }
