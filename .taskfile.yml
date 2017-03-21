@@ -9,4 +9,5 @@
 
 - name: html
   tasks:
-    - htmlmin -o app/index.html src/index.html
+    - mkdir -p app
+    - - htmlmin -o app/index.html src/index.html
