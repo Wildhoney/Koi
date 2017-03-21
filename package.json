@@ -1,6 +1,6 @@
 {
   "name": "koi-koi",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "Koi is a time aware interactive bird written in THREE.js with voice recognition, and an artificial IQ.",
   "dependencies": {
     "document-ready-promise": "^3.0.1",
