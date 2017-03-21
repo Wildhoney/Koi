@@ -11,7 +11,9 @@
   "scripts": {
     "prestart": "npm run build",
     "start": "electron app/main.js",
-    "build": "taskfile build"
+    "build": "taskfile build",
+    "package": "taskfile package",
+    "clean": "taskfile clean"
   },
   "repository": {
     "type": "git",
@@ -54,8 +56,10 @@
     "babel-preset-es2015": "~6.24.0",
     "babel-preset-stage-0": "~6.22.0",
     "electron": "~1.6.2",
+    "electron-packager": "~8.6.0",
     "html-minifier-cli": "~0.1.0",
     "rambda": "~0.5.5",
+    "rimraf": "~2.6.1",
     "switzerland": "~0.3.0",
     "taskfile": "~0.1.10",
     "webpack": "~2.2.1"

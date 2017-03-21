@@ -3,6 +3,11 @@
     - taskfile js
     - taskfile html
 
+- name: package
+  tasks:
+    - mkdir -p package
+    - - electron-packager package koikoi --all --icon "/media/birdhouse.svg"
+
 - name: js
   tasks:
     - webpack
@@ -11,3 +16,8 @@
   tasks:
     - mkdir -p app
     - - htmlmin -o app/index.html src/index.html
+
+- name: clean
+  tasks:
+    - rimraf app/
+    - rimraf node_modules/
