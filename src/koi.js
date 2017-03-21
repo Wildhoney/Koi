@@ -1,10 +1,14 @@
 import { app, BrowserWindow } from 'electron';
 import path                   from 'path';
 import url                    from 'url';
+// import { create }             from 'switzerland';
+// import { html }               from 'switzerland/middleware';
+
+let main = null;
 
 app.on('ready', function() {
 
-    const main = new BrowserWindow({
+    main = new BrowserWindow({
         height: 600,
         width: 800
     });

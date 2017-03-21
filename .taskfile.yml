@@ -1,0 +1,12 @@
+- name: build
+  tasks:
+    - taskfile js
+    - taskfile html
+
+- name: js
+  tasks:
+    - webpack
+
+- name: html
+  tasks:
+    - htmlmin -o app/index.html src/index.html
