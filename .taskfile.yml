@@ -6,7 +6,7 @@
 - name: package
   tasks:
     - mkdir -p package
-    - - electron-packager package koikoi --all --icon "/media/birdhouse.svg"
+    - - electron-packager . koikoi --all --icon "/media/birdhouse.svg"
 
 - name: js
   tasks:
