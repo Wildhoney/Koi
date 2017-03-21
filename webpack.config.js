@@ -1,12 +1,13 @@
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
-    entry: './src/default.js',
+    entry: './src/koi.js',
+    target: 'electron',
     output: {
-        path: __dirname + '/public/assets',
-        publicPath: '/assets/',
-        filename: 'koi.js'
+        path: __dirname + '/app',
+        filename: 'main.js'
+    },
+    node: {
+        __dirname: false,
+        __filename: false
     },
     module: {
         loaders: [
@@ -16,22 +17,7 @@ module.exports = {
                 query: {
                     presets: ['es2015', 'stage-0']
                 }
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('css!autoprefixer?browsers=last 2 version!sass?outputStyle=compact')
             }
         ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env':{
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new ExtractTextPlugin('koi.css'),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ]
+    }
 };
